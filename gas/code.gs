@@ -39,7 +39,10 @@ function onEdit(e) {
       if (inputValue) {
         // Make the POST request
         const response = UrlFetchApp.fetch(apiUrl, options);
-        
+
+        // Make delay to avoid show error when doing request
+        Utilities.sleep(4500);
+
         // Get the response as plain text
         const apiResult = response.getContentText();
         
@@ -51,6 +54,10 @@ function onEdit(e) {
 
     } catch (error) {
       Logger.log('Error fetching API or processing response: ' + error.message);
+
+      // delay to wait for request finish
+      Utilities.sleep(5000);
+
       sheet.getRange(row, 3).setValue('Error');
     }
   }
